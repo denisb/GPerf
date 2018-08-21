@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".SortActivity"
+    tools:showIn="@layout/activity_sort">
+
+    <TextView
+        android:id="@+id/textViewTri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="Les tris : choisir le nombre d'éléments, l'ordre initial, l'algorithme."
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupTaille"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTaille"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/buttonInsertion"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroupForme"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTri">
+
+        <RadioButton
+            android:id="@+id/radioButton100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <RadioButton
+            android:id="@+id/radioButton1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1000" />
+
+        <RadioButton
+            android:id="@+id/radioButton10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="10 000" />
+
+        <RadioButton
+            android:id="@+id/radioButton100000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100 000" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupForme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMinimum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroupTaille"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTri">
+
+        <RadioButton
+            android:id="@+id/radioButtonIdentiques"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Toutes identiques" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrdonnees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ordonnées" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPresqueOrdonnees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Presque ordonnées" />
+
+        <RadioButton
+            android:id="@+id/radioButtonALEnvers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ordre inverse" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAleatoire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Aléatoires" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonInsertion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insertion"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatTri"
+        app:layout_constraintEnd_toStartOf="@+id/buttonMinimum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupForme" />
+
+    <Button
+        android:id="@+id/buttonMinimum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sélection"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatTri"
+        app:layout_constraintEnd_toStartOf="@+id/buttonFusion"
+        app:layout_constraintStart_toEndOf="@+id/buttonInsertion"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupForme" />
+
+    <Button
+        android:id="@+id/buttonFusion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fusion"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatTri"
+        app:layout_constraintEnd_toStartOf="@+id/buttonRapide"
+        app:layout_constraintStart_toEndOf="@+id/buttonMinimum"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupForme" />
+
+    <Button
+        android:id="@+id/buttonRapide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rapide"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatTri"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonFusion"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupForme" />
+
+    <TextView
+        android:id="@+id/textViewResultatTri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Allons-y !"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonInsertion" />
+</android.support.constraint.ConstraintLayout>
