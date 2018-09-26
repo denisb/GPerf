@@ -10,10 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class SortActivity extends AppCompatActivity {
+public class DataActivity extends AppCompatActivity {
 
-    String strResultatTri;
+    String strResultatData;
     long timeStampMillisInit;
     long timeStampMillisFin;
     int donnees [];
@@ -24,93 +25,76 @@ public class SortActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sort);
+        setContentView(R.layout.activity_data);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btnIns = (Button) findViewById(R.id.buttonInsertion);
-        btnIns.setOnClickListener(new View.OnClickListener() {
+
+        Button btnPrem = (Button) findViewById(R.id.buttonPremier);
+        btnPrem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
+                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
                 tv.setText("... calcul en cours ...");
                 new Thread(new Runnable() {
                     public void run() {
                         timeStampMillisInit = System.currentTimeMillis();
                         getDonnees();
-                        int i, j, temp;
-                        for (i = 1; i < donnees.length; i++) {
-                            j = i - 1;
-                            while (j >= 0 && donnees[j] > donnees[i]) {
-                                temp = donnees[i];
-                                donnees[i] = donnees[j];
-                                donnees[j] = temp;
-                                i = j;
-                                j--; } }
-                        strResultatTri = "Calcul fini en ";
+                        rcquicksortPremier(0,donnees.length-1);
+                        strResultatData = "Calcul fini en ";
                         timeStampMillisFin = System.currentTimeMillis();
                         v.post(new Runnable() {
                             public void run() {
-                                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
-                                tv.setText(strResultatTri + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
+                                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
+                                tv.setText(strResultatData + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
                     }
                 }).start(); }});
 
-        Button btnSel = (Button) findViewById(R.id.buttonMinimum);
-        btnSel.setOnClickListener(new View.OnClickListener() {
+        Button btnMil = (Button) findViewById(R.id.buttonMilieu);
+        btnMil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
+                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
                 tv.setText("... calcul en cours ...");
                 new Thread(new Runnable() {
                     public void run() {
                         timeStampMillisInit = System.currentTimeMillis();
                         getDonnees();
-                        int i, j, temp;
-                        for(i = 0;i<donnees.length-1;i++){
-                            int min = Integer.MAX_VALUE;
-                            int imin = i+1;
-                            for(j = i; j<donnees.length;j++){
-                                if(donnees[j]<min){
-                                    imin = j;
-                                    min = donnees[j]; } }
-                            temp = donnees[i];
-                            donnees[i] = donnees[imin];
-                            donnees[imin] = temp; };
-                        strResultatTri = "Calcul fini en ";
+                        rcquicksortMilieu(0,donnees.length-1);
+                        strResultatData = "Calcul fini en ";
                         timeStampMillisFin = System.currentTimeMillis();
                         v.post(new Runnable() {
                             public void run() {
-                                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
-                                tv.setText(strResultatTri + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
+                                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
+                                tv.setText(strResultatData + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
                     }
                 }).start(); }});
 
-        Button btnMerge = (Button) findViewById(R.id.buttonFusion);
-        btnMerge.setOnClickListener(new View.OnClickListener() {
+        Button btnMoy = (Button) findViewById(R.id.buttonMoyenne);
+        btnMoy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
+                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
                 tv.setText("... calcul en cours ...");
                 new Thread(new Runnable() {
                     public void run() {
                         timeStampMillisInit = System.currentTimeMillis();
                         getDonnees();
-                        rcmerge_sort(0, donnees.length-1);
-                        strResultatTri = "Calcul fini en ";
+                        rcquicksortMoyenne(0,donnees.length-1);
+                        strResultatData = "Calcul fini en ";
                         timeStampMillisFin = System.currentTimeMillis();
                         v.post(new Runnable() {
                             public void run() {
-                                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
-                                tv.setText(strResultatTri + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
+                                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
+                                tv.setText(strResultatData + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
                     }
                 }).start(); }});
 
-        Button btnQuick = (Button) findViewById(R.id.buttonRapide);
-        btnQuick.setOnClickListener(new View.OnClickListener() {
+        Button btnAlea = (Button) findViewById(R.id.buttonAleatoire);
+        btnAlea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
+                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
                 tv.setText("... calcul en cours ...");
                 ThreadGroup group = new ThreadGroup("threadGroup");
                 //new Thread(group, runnableObject, "YourThreadName", 2000000).start();
@@ -118,16 +102,16 @@ public class SortActivity extends AppCompatActivity {
                     public void run() {
                         timeStampMillisInit = System.currentTimeMillis();
                         getDonnees();
-                        rcquicksort(0,donnees.length-1);
-                        //stringFromJNICalcQuick(donnees.length);
-                        strResultatTri = "Calcul fini en ";
+                        rcquicksortAleatoire(0,donnees.length-1);
+                        strResultatData = "Calcul fini en ";
                         timeStampMillisFin = System.currentTimeMillis();
                         v.post(new Runnable() {
                             public void run() {
-                                TextView tv = (TextView) findViewById(R.id.textViewResultatTri);
-                                tv.setText(strResultatTri + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
+                                TextView tv = (TextView) findViewById(R.id.textViewResultatData);
+                                tv.setText(strResultatData + Long.toString((timeStampMillisFin - timeStampMillisInit)) + "ms"); }});
                     }
                 },"GPerfThreadName", 2000000).start(); }});
+
     }
 
 
@@ -142,19 +126,19 @@ public class SortActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.home:
-                intent = new Intent(SortActivity.this, MainActivity.class);
+                intent = new Intent(DataActivity.this, MainActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.data:
-                intent = new Intent(SortActivity.this, DataActivity.class);
+            case R.id.sort:
+                intent = new Intent(DataActivity.this, SortActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.quiz:
-                intent = new Intent(SortActivity.this, QuizActivity.class);
+                intent = new Intent(DataActivity.this, QuizActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.information:
-                intent = new Intent(SortActivity.this, DetailActivity.class);
+                intent = new Intent(DataActivity.this, DetailActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -165,10 +149,10 @@ public class SortActivity extends AppCompatActivity {
 
     public int[] getDonnees() {
         int pTailleDonnees = 0;
-        RadioButton rb100 = (RadioButton) findViewById(R.id.radioButton100);
-        RadioButton rb1000 = (RadioButton) findViewById(R.id.radioButton1000);
-        RadioButton rb10000 = (RadioButton) findViewById(R.id.radioButton10000);
-        RadioButton rb100000 = (RadioButton) findViewById(R.id.radioButton100000);
+        RadioButton rb100 = (RadioButton) findViewById(R.id.radioButtonData100);
+        RadioButton rb1000 = (RadioButton) findViewById(R.id.radioButtonData1000);
+        RadioButton rb10000 = (RadioButton) findViewById(R.id.radioButtonData10000);
+        RadioButton rb100000 = (RadioButton) findViewById(R.id.radioButtonData100000);
         if (rb100.isChecked()) {
             pTailleDonnees = 100; }
         else if (rb1000.isChecked()) {
@@ -178,11 +162,11 @@ public class SortActivity extends AppCompatActivity {
         else if (rb100000.isChecked()) {
             pTailleDonnees = 100000; }
         donnees = new int[pTailleDonnees];
-        RadioButton rbId = (RadioButton) findViewById(R.id.radioButtonIdentiques);
-        RadioButton rbOrd = (RadioButton) findViewById(R.id.radioButtonOrdonnees);
-        RadioButton rbPresq = (RadioButton) findViewById(R.id.radioButtonPresqueOrdonnees);
-        RadioButton rbInv = (RadioButton) findViewById(R.id.radioButtonALEnvers);
-        RadioButton rbAlea = (RadioButton) findViewById(R.id.radioButtonAleatoire);
+        RadioButton rbId = (RadioButton) findViewById(R.id.radioButtonIdentiquesData);
+        RadioButton rbOrd = (RadioButton) findViewById(R.id.radioButtonOrdonneesData);
+        RadioButton rbPresq = (RadioButton) findViewById(R.id.radioButtonPresqueOrdonneesData);
+        RadioButton rbCent = (RadioButton) findViewById(R.id.radioButtonCentreesData);
+        RadioButton rbAlea = (RadioButton) findViewById(R.id.radioButtonAleatoireData);
         if (rbId.isChecked()) {
             for(int i=0;i<donnees.length;i++) {
                 donnees[i]=pTailleDonnees;}}
@@ -196,34 +180,13 @@ public class SortActivity extends AppCompatActivity {
                     donnees[i]=(int) (pTailleDonnees*Math.random());}
                 else {
                     donnees[i]=val++;}}}
-        else if (rbInv.isChecked()) {
+        else if (rbCent.isChecked()) {
             for(int i=0;i<donnees.length;i++) {
-                donnees[i]=pTailleDonnees-i;}}
+                donnees[i]= Math.round((pTailleDonnees-2*i)*(pTailleDonnees-Math.round(i/pTailleDonnees)%2))+(1-Math.round((pTailleDonnees-2*i)))*(Math.round(i/pTailleDonnees)%2); }}
         else if (rbAlea.isChecked()) {
             for(int i=0;i<donnees.length;i++) {
                 donnees[i]=(int) (pTailleDonnees*Math.random());}}
         return donnees;}
-
-    void rcmerge (int z, int n, int m) {
-        int i, j, k;
-        int x [] =  new int[n];
-        for (i = 0, j = m, k = 0; k < n-z; k++) {
-            x[k] = j == n      ? donnees[z+i++]
-                    : i == m      ? donnees[z+j++]
-                    : donnees[z+j] < donnees[z+i] ? donnees[z+j++]
-                    :               donnees[z+i++]; }
-        for (i = 0; i < n; i++) {
-            donnees[z+i] = x[i]; }
-    }
-
-    void rcmerge_sort (int z, int n) {
-        if (n < 2)
-            return;
-        int m = n / 2;
-        rcmerge_sort(z, m);
-        rcmerge_sort(z+m, n - m);
-        rcmerge(z, n, m); }
-
 
     int rcpartition ( int low, int high) {
         int pivot = donnees[high];
@@ -240,15 +203,55 @@ public class SortActivity extends AppCompatActivity {
         donnees[high] = tmp;
         return (i + 1); }
 
-    void rcquicksort( int low, int high) {
+    void rcquicksortPremier( int low, int high) {
         if (low < high) {
+            int tmp = donnees[low];
+            donnees[low] = donnees[high];
+            donnees[high] = tmp;
             int pi = rcpartition(low, high);
-            //try {
-                rcquicksort(low,pi - 1);
-                rcquicksort(pi + 1, high);}
-            //catch (Exception  e) {
-            //    Toast.makeText(this,"Erreur", Toast.LENGTH_LONG).show();}
-        }
+            rcquicksortPremier(low,pi - 1);
+            rcquicksortPremier(pi + 1, high);}
+    }
+
+    void rcquicksortMilieu( int low, int high) {
+        if (low < high) {
+            int tmp = donnees[(low+high)/2];
+            donnees[(low+high)/2] = donnees[high];
+            donnees[high] = tmp;
+            int pi = rcpartition(low, high);
+            rcquicksortPremier(low,pi - 1);
+            rcquicksortPremier(pi + 1, high);}
+    }
+
+    void rcquicksortMoyenne( int low, int high) {
+        if (low < high) {
+            int somme=0;
+            int moyenne=-1;
+            int iMoyenne=low;
+            for(int i=low;i<=high;i++) {
+              somme += donnees[i];}
+            moyenne = somme / (high-low+1);
+            for(int i=low+1;i<=high;i++) {
+                if (Math.abs(donnees[i]-moyenne)<Math.abs(donnees[i]-donnees[iMoyenne])) {
+                    iMoyenne = i;}}
+            int tmp = donnees[iMoyenne];
+            donnees[iMoyenne] = donnees[high];
+            donnees[high] = tmp;
+            int pi = rcpartition(low, high);
+            rcquicksortPremier(low,pi - 1);
+            rcquicksortPremier(pi + 1, high);}
+    }
+
+    void rcquicksortAleatoire( int low, int high) {
+        if (low < high) {
+            int iAleatoire = Math.round((int)(low+Math.random()*(high-low))); //Math.round(low+Math.random()*(high-low+1));
+            int tmp = donnees[iAleatoire];
+            donnees[iAleatoire] = donnees[high];
+            donnees[high] = tmp;
+            int pi = rcpartition(low, high);
+            rcquicksortPremier(low,pi - 1);
+            rcquicksortPremier(pi + 1, high);}
+    }
 
 }
 

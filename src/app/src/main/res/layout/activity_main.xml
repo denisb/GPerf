@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonCalcVarJava"
-        android:layout_width="88dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
-        android:text="Java/f()"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonCalcVar"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupTaille" />
 
     <TextView
         android:id="@+id/texteConsigne"
@@ -38,9 +28,19 @@
         android:text="Allons-y !"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCalcReg" />
+
+    <Button
+        android:id="@+id/buttonCalcVarJava"
+        android:layout_width="88dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:text="Java/f()"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTaille" />
 
     <Button
         android:id="@+id/buttonCalcVar"
@@ -50,8 +50,19 @@
         android:text="CPP/Var"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/buttonCalcVarJava"
-        app:layout_constraintStart_toEndOf="@+id/buttonCalcReg"
+        app:layout_constraintStart_toEndOf="@+id/buttonCalcVar02"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupTaille" />
+
+    <Button
+        android:id="@+id/buttonCalcVar02"
+        android:layout_width="88dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:text="CPP/Var -O2"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCalcVar"
+        app:layout_constraintStart_toEndOf="@+id/buttonCalcReg"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTaille"/>
 
     <Button
         android:id="@+id/buttonCalcReg"
@@ -60,7 +71,6 @@
         android:layout_marginTop="8dp"
         android:text="ARM/Reg"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/buttonCalcVar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupTaille" />
 
@@ -197,5 +207,6 @@
             android:layout_weight="1"
             android:text="Quadratique" />
     </RadioGroup>
+
 
 </android.support.constraint.ConstraintLayout>

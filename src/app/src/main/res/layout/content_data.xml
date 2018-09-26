@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".DataActivity"
+    tools:showIn="@layout/activity_data">
+
+    <TextView
+        android:id="@+id/textViewData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="Forme des données : choisir taille, forme des données et choix du pivot pour la variante du tri par pivot."
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupTailleData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTailleData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPremier"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroupFormeData"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewData">
+
+        <RadioButton
+            android:id="@+id/radioButtonData100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100" />
+
+        <RadioButton
+            android:id="@+id/radioButtonData1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonData10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="10 000" />
+
+        <RadioButton
+            android:id="@+id/radioButtonData100000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="100 000" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupFormeData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMilieu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroupTailleData"
+        app:layout_constraintTop_toBottomOf="@+id/textViewData">
+
+        <RadioButton
+            android:id="@+id/radioButtonIdentiquesData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Toutes identiques" />
+
+        <RadioButton
+            android:id="@+id/radioButtonOrdonneesData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ordonnées" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPresqueOrdonneesData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Presque ordonnées" />
+
+        <RadioButton
+            android:id="@+id/radioButtonCentreesData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Centrées" />
+
+        <RadioButton
+            android:id="@+id/radioButtonAleatoireData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Aléatoires" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonPremier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Premier"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatData"
+        app:layout_constraintEnd_toStartOf="@+id/buttonMilieu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupFormeData" />
+
+    <Button
+        android:id="@+id/buttonMilieu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Milieu"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatData"
+        app:layout_constraintEnd_toStartOf="@+id/buttonMoyenne"
+        app:layout_constraintStart_toEndOf="@+id/buttonPremier"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupFormeData" />
+
+    <Button
+        android:id="@+id/buttonMoyenne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Moyenne"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatData"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAleatoire"
+        app:layout_constraintStart_toEndOf="@+id/buttonMilieu"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupFormeData" />
+
+    <Button
+        android:id="@+id/buttonAleatoire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aléatoire"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResultatData"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonMoyenne"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupFormeData" />
+
+    <TextView
+        android:id="@+id/textViewResultatData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Allons-y !"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMilieu" />
+</android.support.constraint.ConstraintLayout>

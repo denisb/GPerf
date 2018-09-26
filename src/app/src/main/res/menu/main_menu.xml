@@ -10,8 +10,11 @@
         android:id="@+id/sort"
         android:title="@string/menuSort" />
     <item
+        android:id="@+id/data"
+        android:title="Données" />
+    <item
         android:id="@+id/quiz"
-        android:title="@string/menuQuiz" ></item>
+        android:title="Quiz" />
     <item
         android:id="@+id/information"
         android:title="@string/menuInformation" />

@@ -2,9 +2,11 @@
     <string name="app_name">GPerf</string>
     <string name="menuHome">Accueil</string>
     <string name="menuSort">Tri</string>
+    <string name="menuData">Données</string>
     <string name="menuQuiz">Quiz</string>
     <string name="menuInformation">Information</string>
     <string name="title_activity_sort">(GPerf) Les tris</string>
+    <string name="title_activity_data">(GPerf) La forme des données</string>
     <string name="title_activity_quiz">(GPerf) Quiz !</string>
     <string name="title_activity_detail">(GPerf) Informations</string>
 </resources>

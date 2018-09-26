@@ -44,6 +44,10 @@ public class DetailActivity extends AppCompatActivity {
                 intent = new Intent(DetailActivity.this, SortActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.data:
+                intent = new Intent(DetailActivity.this, DataActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.quiz:
                 intent = new Intent(DetailActivity.this, QuizActivity.class);
                 startActivity(intent);

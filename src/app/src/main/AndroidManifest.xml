@@ -21,6 +21,10 @@
             android:label="@string/title_activity_sort"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".DataActivity"
+            android:label="@string/title_activity_data"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".QuizActivity"
             android:label="@string/title_activity_quiz"
             android:theme="@style/AppTheme.NoActionBar" />

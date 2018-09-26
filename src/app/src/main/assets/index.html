@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Informations</title>
+</head>
+<html>
+<body style="margin:50px; top:50px;">
+<h1>Informations</h1>
+<h2>Détail des algorithmes</h2>
+<h3>Parcours des suites de syracuses</h3>
+<h4>En assembleur (ARM a la main)</h4>
+<pre>    __asm(
+    "ADD R6, %1, #1;"
+    "MOV R7, #1;"
+    "MOV R8, R7;"
+    "B fin;"
+"change:ADD R7, #1;"
+    "MOV R8, R7;"
+    "B suite;"
+"boucle: CMP R8,#1;"
+    "BEQ change;"
+    "CMP R8,#-1;"
+    "BEQ change;"
+    "CMP R8,#-10;"
+    "BEQ change;"
+    "CMP R8,#-34;"
+    "BEQ change;"
+"suite:ANDS R9, R8, #1;"
+    "BEQ div;"
+    "ADD R8, R8, R8,LSL #1;"
+    "ADD R8, R8, #1;"
+"div:MOV R8, R8, ASR #1;"
+"fin:SUBS R6,#1;"
+    "BNE boucle;"
+    "MOV %0, R7;"
+    : "=r" (n)
+    : "r" (pTailleDonnees)
+    :
+    );</pre>	
+<h4>Assembleur (presque) produit pour C++ -02 pour le programme C++ plus loin </h4>
+<pre>    __asm(
+    "ADD R6, %1, #1;" 
+    "CMP R6, #0;"
+    "BEQ .L2;"
+    "MOV R7, #1;" 
+".L7:CMN R8, #34;" 
+    "IT ne;"
+    "CMPNE R8, #1;"
+    "BEQ .L3;"
+    "CMN R8, #1;"
+    "IT ne;"
+    "CMNNE R8, #10;"
+    "BNE .L4;"
+".L3:ADD R7, R7, #1;"
+    "MOV R8, R7;"
+".L4:TST R8, #1;"
+    "ITT ne;"
+    "ADDNE R8, R8, R8, asl #1;"
+    "ADDNE R8, R8, #1;"
+    "ADD R8, R8, R8, lsr #31;"
+    "SUBS R6, R6, #1;"
+    "MOV R8, R8, asr #1;"
+    "BNE .L7;"
+".L2:MOV R6, R8;"
+    "MOV %0, R7;"
+    : "=r" (n)
+    : "r" (pTailleDonnees)
+    :
+    );</pre>	
+<h4>En C++</h4>
+<pre>for(i=pTailleDonnees;i;i--) {
+  if ((r==1) || (r==-34) || (r==-10)
+             || (r==-1) {
+    n=n+1; r = n;}
+  if (r&1) {
+    r=(r*3+1)/2;}
+  else {
+    r=r/2;}}
+</pre>
+<h4>En Java (avec appel de fonction)</h4>
+<pre>for(i=tailleDonnees;i!=0;i--) {
+  if ((r==1) || (r==-34) || (r==-10)
+             || (r==-1)) {
+    n=n+1; r = n;}
+  r = nextSyracuse(r);}
+
+public int nextSyracuse(int n) {
+  if ((n & 1)==1) {
+    return (n*3+1)/2;}
+  else {
+    return n/2;}}
+</pre>
+<h3>Les Tris</h3>
+<h4>Tri insertion</h4>
+<pre>for (i = 1; i < donnees.length; i++) {
+  j = i - 1;
+  while ((j >= 0) &&
+         (donnees[j] > donnees[i])) {
+    temp = donnees[i];
+    donnees[i] = donnees[j];
+    donnees[j] = temp;
+    i = j;
+    j--; } }
+</pre>
+<h4>Tri selection (du minimum)</h4>
+<pre>for(i = 0;i < donnees.length-1;i++){
+  int min = Integer.MAX_VALUE;
+  int imin = i+1;
+  for(j = i; j < donnees.length;j++){
+    if(donnees[j] < min){
+      imin = j;
+      min = donnees[j]; } }
+  temp = donnees[i];
+  donnees[i] = donnees[imin];
+  donnees[imin] = temp; };
+</pre>
+<h4>Tri fusion</h4>
+<pre>
+void quizmerge (int z, int n, int m) {
+  int i, j, k;
+  int x [] =  new int[n];
+  for (i = 0, j = m, k = 0; k < n-z; k++) {
+    x[k] = j == n ? quizdonnees[z+i++]
+      : i == m ? quizdonnees[z+j++]
+      : quizdonnees[z+j] < quizdonnees[z+i] ? quizdonnees[z+j++]
+      : quizdonnees[z+i++]; }
+  for (i = 0; i < n; i++) {
+    quizdonnees[z+i] = x[i]; }}
+
+void quizmerge_sort (int z, int n) {
+  if (n < 2) return;
+  int m = n / 2;
+  quizmerge_sort(z, m);
+  quizmerge_sort(z+m, n - m);
+  quizmerge(z, n, m); }
+</pre>
+<h4>Tri rapide</h4>
+<pre>
+int quizpartition ( int low, int high) {
+  int pivot = quizdonnees[high];
+  int i = (low - 1);
+  int j, tmp;
+  for ( j = low; j <= high- 1; j++) {
+    if (quizdonnees[j] <= pivot) {
+      i++;
+      tmp = quizdonnees[i];
+      quizdonnees[i] = quizdonnees[j];
+      quizdonnees[j] = tmp; } }
+  tmp = quizdonnees[i+1];
+  quizdonnees[i+1] = quizdonnees[high];
+  quizdonnees[high] = tmp;
+  return (i + 1); }
+
+void quizquicksort( int low, int high) {
+  if (low < high) {
+    int pi = quizpartition(low, high);
+    quizquicksort(low,pi - 1);
+    quizquicksort(pi + 1, high);}}
+</pre>
+</body>
+</html>

@@ -179,6 +179,10 @@ public class QuizActivity extends AppCompatActivity {
                 intent = new Intent(QuizActivity.this, SortActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.data:
+                intent = new Intent(QuizActivity.this, DataActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.information:
                 intent = new Intent(QuizActivity.this, DetailActivity.class);
                 startActivity(intent);

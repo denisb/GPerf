@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
+//Toast.makeText(getApplicationContext(), "Message du moment" , Toast.LENGTH_SHORT).show();
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +67,25 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         timeStampMillisInit = System.currentTimeMillis();
                         strResultat = stringFromJNICalcVar(tailleDonnees);
+                        timeStampMillisFin = System.currentTimeMillis();
+                        v.post(new Runnable() {
+                            public void run() {
+                                TextView tv = (TextView) findViewById(R.id.texteResultat);
+                                //tv.setText(strResultat+Integer.toString(tailleDonnees)+"/"+Long.toString((timeStampMillisFin-timeStampMillisInit))+"ms");}});
+                                tv.setText("Calcul fini en "+Long.toString((timeStampMillisFin-timeStampMillisInit))+"ms");}});
+                    }}).start();}});
+
+        Button bCalc02 = (Button) findViewById(R.id.buttonCalcVar02);
+        bCalc02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                TextView tv = (TextView) findViewById(R.id.texteResultat);
+                tv.setText("... calcul en cours ...");
+                tailleDonnees = getTailleDonnees();
+                new Thread(new Runnable() {
+                    public void run() {
+                        timeStampMillisInit = System.currentTimeMillis();
+                        strResultat = stringFromJNICalcVarOO(tailleDonnees);
                         timeStampMillisFin = System.currentTimeMillis();
                         v.post(new Runnable() {
                             public void run() {
@@ -148,10 +168,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.quiz:
                 intent = new Intent(MainActivity.this, QuizActivity.class);
                 startActivity(intent);
-                //Toast.makeText(this,"Pas encore", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.sort:
                 intent = new Intent(MainActivity.this, SortActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.data:
+                intent = new Intent(MainActivity.this, DataActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.information:
@@ -169,5 +192,7 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNICalcVar(int tailleDonnees);
+    public native String stringFromJNICalcVarOO(int tailleDonnees);
     public native String stringFromJNICalcReg(int tailleDonnees);
+
 }
