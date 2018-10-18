@@ -5,6 +5,10 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+enable_language(ASM)
+set(can_use_assembler TRUE)
+set(CMAKE_VERBOSE_MAKEFILE on)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
@@ -17,7 +21,9 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp )
+             src/main/cpp/syracuse.s
+             src/main/cpp/native-lib.cpp
+             )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
